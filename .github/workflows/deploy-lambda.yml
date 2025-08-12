@@ -6,10 +6,11 @@ on:
       - main
     paths:
       - "lambda/put_random_weather_function"
-  workflow_dispatch:
+  workflow_dispatch:  
 
 jobs:
   deploy:
+    environment: prod
     runs-on: ubuntu-latest
     permissions:
       id-token: write
