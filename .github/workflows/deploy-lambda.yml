@@ -1,3 +1,7 @@
+# https://docs.aws.amazon.com/lambda/latest/dg/deploying-github-actions.html
+# https://zenn.dev/jnxjez/articles/b786869dadf4ff
+# https://docs.github.com/ja/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws
+
 name: Deploy AWS Lambda
 
 on:
@@ -5,7 +9,7 @@ on:
     branches:
       - main
     paths:
-      - "lambda/put_random_weather_function"
+      - "lambda/put_random_weather_function/*"
   workflow_dispatch:  
 
 jobs:
