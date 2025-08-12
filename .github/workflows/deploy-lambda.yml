@@ -1,0 +1,36 @@
+name: Deploy AWS Lambda
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "lambda/put_random_weather_function"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ap-northeast-1
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          mask-aws-account-id: true
+
+      - name: Deploy Lambda Function
+        uses: aws-actions/aws-lambda-deploy@v1
+        with:
+          architectures: x86_64
+          code-artifacts-dir: lambda/put_random_weather_function
+          function-name: put_random_weather_function
+          handler: put_random_weather_function.lambda_handler
+          role: ${{ secrets.LAMBDA_EXECUTION_ROLE }}
+          runtime: python3.13
