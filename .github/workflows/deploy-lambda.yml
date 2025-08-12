@@ -9,7 +9,7 @@ on:
     branches:
       - main
     paths:
-      - "lambda/put_random_weather_function/*"
+      - "src/lambda/*"
   workflow_dispatch:  
 
 jobs:
@@ -34,8 +34,8 @@ jobs:
         uses: aws-actions/aws-lambda-deploy@v1
         with:
           architectures: x86_64
-          code-artifacts-dir: lambda/put_random_weather_function
+          code-artifacts-dir: src/lambda
           function-name: put_random_weather_function
-          handler: put_random_weather_function.lambda_handler
+          handler: lambda_function.lambda_handler
           role: ${{ secrets.LAMBDA_EXECUTION_ROLE }}
           runtime: python3.13
