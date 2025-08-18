@@ -53,6 +53,8 @@ def lambda_handler(event, context):
         }
     )
 
+    print('Update: ' + city_name + ' to ' + weather_name)
+
     return {
         'statusCode': 200,
         'body': json.dumps('Update: ' + str(city_id))
